@@ -1,10 +1,15 @@
 package com.h2square.colosseum
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.h2square.colosseum.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.emailEdt
+import kotlinx.android.synthetic.main.activity_main.passwordEdt
+import kotlinx.android.synthetic.main.activity_main.signUpBtn
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.json.JSONObject
 
 class MainActivity :BaseActivity() {
@@ -16,6 +21,12 @@ class MainActivity :BaseActivity() {
     }
 
     override fun setupEvents() {
+        signUpBtn.setOnClickListener {
+            val myIntent= Intent(mContext,SignUpActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
         loginBtn.setOnClickListener{
             val inputEmail =emailEdt.text.toString()
             val inputPassword =passwordEdt.text.toString()
