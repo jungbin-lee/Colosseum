@@ -3,6 +3,7 @@ package com.h2square.colosseum
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.h2square.colosseum.utils.ContextUtil
 import com.h2square.colosseum.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.*
@@ -37,6 +38,10 @@ class LoginActivity :BaseActivity() {
             val code =jsonObj.getInt("code")
             if(code==200){
                 //로그인 성공
+                val dataObj= jsonObj.getJSONObject("data")
+                val token = dataObj.getString("token")
+                ContextUtil.setToken(mContext,token)
+
                 val loginIntent = Intent(mContext, MainActivity::class.java)
                 startActivity(loginIntent)
                 finish()
