@@ -7,6 +7,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.36875" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.36875" />
+        <entry key="app/src/main/res/layout/activity_view_topic_detail.xml" value="0.291358024691358" />
+        <entry key="app/src/main/res/layout/topic_list_item.xml" value="0.36770833333333336" />
       </map>
     </option>
   </component>

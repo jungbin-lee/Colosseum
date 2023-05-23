@@ -8,5 +8,8 @@
         android:orientation="vertical"
 
         tools:context=".MainActivity">
-
+<ListView
+        android:id="@+id/topicsListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

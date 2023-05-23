@@ -1,5 +1,6 @@
 package com.h2square.colosseum.utils
 
+import android.content.Context
 import android.util.Log
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -115,6 +116,41 @@ class ServerUtil {
                 }
             })
         }
+
+        fun getRequestMainTopicList(context: Context, handler: JsonResponseHandler?){
+
+            val urlBuilder= "${BASE_URL}/v2/main_info".toHttpUrlOrNull()!!.newBuilder()
+//            urlBuilder.addEncodedQueryParameter("type",type)
+//            urlBuilder.addEncodedQueryParameter("value",value)
+
+
+            val urlString = urlBuilder.build().toString()
+            Log.d("완성된 url",urlString)
+            val  request= Request.Builder()
+                .url(urlString)
+                .get()
+                .header("X-Http-Token",ContextUtil.getToken(context))
+                .build()
+
+            val client= OkHttpClient()
+            client.newCall(request).enqueue(object :Callback{
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val bodyString = response.body!!.string()
+
+                    val jsonObject = JSONObject(bodyString)
+                    Log.d("토큰",ContextUtil.getToken(context))
+                    Log.d("서버 응답",jsonObject.toString())
+
+                    handler?.onResponse(jsonObject)
+
+                }
+            })
+        }
+
 
     }
 }
