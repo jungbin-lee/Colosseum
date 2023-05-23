@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.h2square.colosseum.utils.ServerUtil
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.emailEdt
+import kotlinx.android.synthetic.main.activity_sign_up.passwordEdt
+import kotlinx.android.synthetic.main.activity_sign_up.signUpBtn
 import org.json.JSONObject
 
 class SignUpActivity : BaseActivity() {
@@ -16,6 +20,26 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        emailCheckBtn.setOnClickListener {
+            val inputEmail = emailEdt.text.toString()
+
+            ServerUtil.getRequestDuplicate("EMAIL",inputEmail,object :ServerUtil.Companion.JsonResponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+                    val code= jsonObj.getInt("code")
+                    runOnUiThread { 
+                        if (code == 200){
+                            Toast.makeText(mContext, "사용가능합니다.", Toast.LENGTH_SHORT).show()
+                        }else{
+                            val message = jsonObj.getString("message")
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+
+            })
+        }
 
         signUpBtn.setOnClickListener {
          val inputEmail= emailEdt.text.toString()
