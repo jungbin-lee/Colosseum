@@ -12,6 +12,8 @@ import java.util.*
 
 class MainActivity : BaseActivity() {
 
+
+
     val mTopicList= ArrayList<Topic>()
     lateinit var mTopicAdapter: TopicAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
